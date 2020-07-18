@@ -1,6 +1,7 @@
 package com.vtb.kortunov.lesson14;
 
 import java.io.*;
+import java.nio.file.NotDirectoryException;
 import java.util.Objects;
 
 public class Main {
@@ -15,7 +16,7 @@ public class Main {
         mergingFiles(file2);
 
         //Task 3
-        File file3 = new File("task3");
+        File file3 = new File("file.txt");
         deleteDirectories(file3);
     }
 
@@ -64,7 +65,10 @@ public class Main {
     }
 
     //Task 2
-    public static void deleteDirectories(File directory){
+    public static void deleteDirectories(File directory)  {
+        if (!directory.isDirectory()){
+            throw new RuntimeException();
+        }
         for (final File fileEntry : Objects.requireNonNull(directory.listFiles())){
             if (fileEntry.isDirectory()) {
                 deleteDirectories(fileEntry);
